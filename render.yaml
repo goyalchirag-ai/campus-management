@@ -10,3 +10,23 @@ services:
         sync: false
       - key: SUPABASE_PUBLISHABLE_KEY
         sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false
+  - type: web
+    name: campus-management-frontend
+    runtime: static
+    buildCommand: pip install -r frontend-requirements.txt && python build_frontend.py
+    staticPublishPath: dist
+    envVars:
+      - key: API_BASE_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /events/*
+        destination: /event.html
+      - type: rewrite
+        source: /registrations
+        destination: /registrations.html
+      - type: rewrite
+        source: /organizer
+        destination: /organizer.html

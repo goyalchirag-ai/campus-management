@@ -11,6 +11,24 @@ load_dotenv(Path(__file__).with_name(".env"))
 
 app = Flask(__name__)
 
+frontend_origins = {
+    origin.strip().rstrip("/")
+    for origin in os.environ.get("FRONTEND_ORIGINS", "").split(",")
+    if origin.strip()
+}
+
+
+@app.after_request
+def allow_frontend_requests(response):
+    origin = request.headers.get("Origin")
+    if request.path.startswith("/api/"):
+        response.vary.add("Origin")
+        if origin in frontend_origins:
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    return response
+
 supabase_url = os.environ.get("SUPABASE_URL")
 supabase_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY")
 if not supabase_url or not supabase_key:

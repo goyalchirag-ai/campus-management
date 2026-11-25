@@ -1,5 +1,6 @@
 const USER_ID_KEY = "gather.userId";
 const ORGANIZER_ID_KEY = "gather.organizerId";
+const API_BASE_URL = (window.GATHER_API_BASE_URL || "").replace(/\/+$/, "");
 
 const getSavedId = (key) => window.localStorage.getItem(key) || "";
 
@@ -10,7 +11,7 @@ function setMessage(element, message, tone = "") {
 }
 
 async function apiRequest(path, options = {}) {
-  const response = await fetch(path, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: {
       Accept: "application/json",
@@ -112,7 +113,7 @@ async function loadEvents() {
 }
 
 async function loadEventDetail() {
-  const eventId = document.body.dataset.eventId;
+  const eventId = document.body.dataset.eventId || decodeURIComponent(window.location.pathname.split("/")[2] || "");
   const message = document.getElementById("event-message");
   const panel = document.getElementById("event-detail");
   const registerInput = document.getElementById("register-user-id");

@@ -42,6 +42,7 @@
         <a href="{{ url_for('organizer_page') }}">Organizer</a>
       </nav>
     </footer>
+    {% if static_frontend %}<script src="/static/config.js"></script>{% endif %}
     <script src="{{ url_for('static', filename='app.js') }}" defer></script>
   </body>
 </html>
