@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Gather — Discover events{% endblock %}
+{% block page_name %}events{% endblock %}
+{% block content %}
+  <section class="hero">
+    <div class="eyebrow"><span class="pulse-dot"></span> Find your next gathering</div>
+    <h1>Make room for <span class="text-gradient">something good.</span></h1>
+    <p>Browse events, save your seat, and keep every registration in one place.</p>
+    <a class="button button-primary" href="#events">
+      Explore events <span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span>
+    </a>
+    <div class="hero-orb hero-orb-one"></div>
+    <div class="hero-orb hero-orb-two"></div>
+  </section>
+
+  <section class="identity-panel" aria-labelledby="identity-heading">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow eyebrow-muted">Prototype access</div>
+        <h2 id="identity-heading">Set your IDs</h2>
+      </div>
+      <span class="identity-warning">No authentication is enabled. IDs are not verified.</span>
+    </div>
+    <div class="identity-forms">
+      <form id="user-id-form" class="identity-form">
+        <label for="user-id-input">Attendee user ID</label>
+        <div class="input-row">
+          <input id="user-id-input" name="user_id" autocomplete="off" placeholder="Paste an existing user UUID">
+          <button class="button button-secondary" type="submit">Save ID</button>
+        </div>
+        <p>Used to register and view your registrations.</p>
+      </form>
+      <form id="organizer-id-form" class="identity-form">
+        <label for="organizer-id-input">Organizer user ID</label>
+        <div class="input-row">
+          <input id="organizer-id-input" name="organizer_id" autocomplete="off" placeholder="Paste an organizer UUID">
+          <button class="button button-secondary" type="submit">Save ID</button>
+        </div>
+        <p>Used to view attendee lists for your events.</p>
+      </form>
+    </div>
+  </section>
+
+  <section id="events" class="content-section">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow eyebrow-muted">The lineup</div>
+        <h2>Browse events</h2>
+      </div>
+      <span id="event-count" class="count-pill">Loading</span>
+    </div>
+    <div id="events-message" class="notice" role="status" aria-live="polite">Loading events…</div>
+    <div id="events-grid" class="event-grid"></div>
+  </section>
+{% endblock %}

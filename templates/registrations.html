@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Gather — My registrations{% endblock %}
+{% block page_name %}registrations{% endblock %}
+{% block content %}
+  <section class="page-heading">
+    <div>
+      <div class="eyebrow"><span class="pulse-dot"></span> Your event passes</div>
+      <h1>Your registrations</h1>
+      <p class="lead">Your saved seats, all in one place.</p>
+    </div>
+    <span id="registration-count" class="count-pill">— registrations</span>
+  </section>
+  <section class="identity-panel compact-panel">
+    <form id="registrations-user-form" class="identity-form">
+      <label for="registrations-user-id">Attendee user ID</label>
+      <div class="input-row">
+        <input id="registrations-user-id" name="user_id" autocomplete="off" placeholder="Paste an existing user UUID" required>
+        <button class="button button-secondary" type="submit">Load registrations</button>
+      </div>
+      <p>IDs are supplied directly because this prototype has no authentication.</p>
+    </form>
+  </section>
+  <div id="registrations-message" class="notice" role="status" aria-live="polite"></div>
+  <section id="registrations-grid" class="ticket-list"></section>
+{% endblock %}

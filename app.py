@@ -3,7 +3,7 @@ from pathlib import Path
 from uuid import UUID
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 from postgrest import APIError
 from supabase import Client, create_client
 
@@ -35,17 +35,22 @@ def database_error():
 
 @app.route("/")
 def index():
-    try:
-        response = supabase.table("users").select("email").execute()
-    except APIError:
-        return database_error()
+    return render_template("events.html")
 
-    users = response.data
-    html = "<h1>users</h1><ul>"
-    for user in users:
-        html += f"<li>{user['email']}</li>"
-    html += "</ul>"
-    return html
+
+@app.get("/events/<event_id>")
+def event_page(event_id):
+    return render_template("event_detail.html", event_id=event_id)
+
+
+@app.get("/registrations")
+def registrations_page():
+    return render_template("registrations.html")
+
+
+@app.get("/organizer")
+def organizer_page():
+    return render_template("organizer.html")
 
 
 @app.get("/health")

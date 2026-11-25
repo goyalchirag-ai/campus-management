@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Gather — Event details{% endblock %}
+{% block page_name %}event-detail{% endblock %}
+{% block body_attributes %}data-event-id="{{ event_id }}"{% endblock %}
+{% block content %}
+  <a class="back-link" href="{{ url_for('index') }}">
+    <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> All events
+  </a>
+  <div id="event-message" class="notice" role="status" aria-live="polite">Loading event…</div>
+  <section id="event-detail" class="detail-layout" hidden>
+    <article class="ticket-card">
+      <div class="ticket-main">
+        <div class="eyebrow"><span class="pulse-dot"></span><span id="event-status">Event</span></div>
+        <h1 id="event-title">Event title</h1>
+        <p class="lead">A place to meet, learn, and share ideas. Event information below is loaded from the event database.</p>
+        <div class="detail-facts">
+          <div class="fact-card">
+            <span class="material-symbols-outlined" aria-hidden="true">groups</span>
+            <div><small>Capacity</small><strong id="event-capacity">—</strong></div>
+          </div>
+          <div class="fact-card">
+            <span class="material-symbols-outlined" aria-hidden="true">fingerprint</span>
+            <div><small>Event ID</small><strong id="event-id"></strong></div>
+          </div>
+          <div class="fact-card fact-wide">
+            <span class="material-symbols-outlined" aria-hidden="true">person</span>
+            <div><small>Organizer ID</small><strong id="event-organizer"></strong></div>
+          </div>
+        </div>
+      </div>
+      <aside class="registration-panel">
+        <div class="eyebrow eyebrow-muted">Attendee pass</div>
+        <h2>Save your seat</h2>
+        <p>Use an existing user ID from the database. Authentication is not enabled yet.</p>
+        <form id="register-form">
+          <label for="register-user-id">Your user ID</label>
+          <input id="register-user-id" name="user_id" autocomplete="off" placeholder="UUID from users table" required>
+          <button id="register-button" class="button button-primary button-wide" type="submit">
+            Register for this event
+          </button>
+        </form>
+        <div id="registration-message" class="inline-message" role="status" aria-live="polite"></div>
+        <a class="text-link" href="{{ url_for('registrations_page') }}">View my registrations</a>
+      </aside>
+    </article>
+  </section>
+{% endblock %}

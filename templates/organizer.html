@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Gather — Organizer dashboard{% endblock %}
+{% block page_name %}organizer{% endblock %}
+{% block content %}
+  <section class="page-heading organizer-heading">
+    <div>
+      <div class="eyebrow"><span class="pulse-dot"></span> Host terminal</div>
+      <h1>Organizer dashboard</h1>
+      <p class="lead">Review events and attendee registrations associated with your organizer ID.</p>
+    </div>
+  </section>
+  <section class="identity-panel compact-panel">
+    <form id="organizer-form" class="identity-form">
+      <label for="organizer-id">Organizer user ID</label>
+      <div class="input-row">
+        <input id="organizer-id" name="organizer_id" autocomplete="off" placeholder="Paste your organizer UUID" required>
+        <button class="button button-secondary" type="submit">Load dashboard</button>
+      </div>
+      <p>No authentication is enabled; this ID is only a query parameter and does not prove ownership.</p>
+    </form>
+  </section>
+  <div id="organizer-message" class="notice" role="status" aria-live="polite"></div>
+  <section id="organizer-metrics" class="metric-grid" hidden>
+    <article class="metric-card"><span>Hosted events</span><strong id="metric-events">0</strong></article>
+    <article class="metric-card"><span>Total registrations</span><strong id="metric-registrations">0</strong></article>
+    <article class="metric-card"><span>Seats available</span><strong id="metric-seats">—</strong></article>
+  </section>
+  <section class="content-section">
+    <div class="section-heading"><div><div class="eyebrow eyebrow-muted">Your events</div><h2>Managed events</h2></div></div>
+    <div id="organizer-events" class="organizer-list"></div>
+  </section>
+  <section id="attendees-section" class="content-section" hidden>
+    <div class="section-heading"><div><div class="eyebrow eyebrow-muted">Event roster</div><h2 id="attendees-title">Attendees</h2></div></div>
+    <div id="attendees-message" class="notice" role="status" aria-live="polite"></div>
+    <div id="attendees-list" class="attendee-list"></div>
+  </section>
+{% endblock %}
